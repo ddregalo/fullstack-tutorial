@@ -13,11 +13,9 @@ class ArtworkAPI extends RESTDataSource {
           : [];
     }
 
-    async getArtworkById() {
-        const response = await this.get('launches');
-        return Array.isArray(response)
-          ? response.map(artwork => this.artworkReducer(artwork))
-          : [];
+    async getArtworkById({ artworkId }) {
+        const response = await this.get('launches', { flight_number: artworkId });
+        return this.artworkReducer(response[0]);
     }
 
     getArtworksByIds({ artworkIds }) {
@@ -30,7 +28,7 @@ class ArtworkAPI extends RESTDataSource {
         return {
           id: artwork.flight_number || 0,
           artist: {
-            id: artwork.rocket.rocket_id,
+            id: artwork.rocket.rocket_id || 0,
             firstName: artwork.mission_name,
             lastName: artwork.rocket.rocket_name,
             dateOfBirth: parseInt(Math.floor(Math.random() * 2000)),

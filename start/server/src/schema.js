@@ -2,9 +2,18 @@ const { gql } = require('apollo-server');
 
 const typeDefs = gql`
     type Query {
+        artworks(
+            pageSize: Int
+            after: String
+          ): ArtworkConnection!
+          artwork(id: ID!): Artwork
+          me: User
+    }
+
+    type ArtworkConnection {
+        cursor: String!
+        hasMore: Boolean!
         artworks: [Artwork]!
-        artwork(id: ID!): Artwork
-        me: User
     }
 
     type Artwork {
@@ -29,7 +38,7 @@ const typeDefs = gql`
     type User {
         id: ID!
         email: String!
-        artworkss: [Artwork]!
+        artworks: [Artwork]!
     }
 
     type Artist {

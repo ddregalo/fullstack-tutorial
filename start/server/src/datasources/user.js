@@ -49,7 +49,7 @@ class UserAPI extends DataSource {
 
   async buyArtwork({ artworkId }) {
     const userId = this.context.user.id;
-    const res = await this.store.trips.findOrCreate({
+    const res = await this.store.artworks.findOrCreate({
       where: { userId, artworkId },
     });
     return res && res.length ? res[0].get() : false;
@@ -57,12 +57,12 @@ class UserAPI extends DataSource {
 
   async cancelArtworkPurchase({ artworkId }) {
     const userId = this.context.user.id;
-    return !!this.store.trips.destroy({ where: { userId, artworkId } });
+    return !!this.store.artworks.destroy({ where: { userId, artworkId } });
   }
 
   async getArtworkIdsByUser() {
     const userId = this.context.user.id;
-    const found = await this.store.trips.findAll({
+    const found = await this.store.artworks.findAll({
       where: { userId },
     });
     return found && found.length
@@ -73,7 +73,7 @@ class UserAPI extends DataSource {
   async isUserConfirmedToBuy({ artworkId }) {
     if (!this.context || !this.context.user) return false;
     const userId = this.context.user.id;
-    const found = await this.store.trips.findAll({
+    const found = await this.store.artworks.findAll({
       where: { userId, artworkId },
     });
     return found && found.length > 0;

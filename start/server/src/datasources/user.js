@@ -37,10 +37,8 @@ class UserAPI extends DataSource {
 
     let results = [];
 
-    // for each artwork id, try to book the trip and add it to the results array
-    // if successful
     for (const artworkId of artworkIds) {
-      const res = await this.bookTrip({ artworkId });
+      const res = await this.buyArtwork({ artworkId });
       if (res) results.push(res);
     }
 

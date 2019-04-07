@@ -34,15 +34,13 @@ class ArtworkAPI extends RESTDataSource {
             firstName: artwork.mission_name,
             lastName: artwork.rocket.rocket_name,
             dateOfBirth: parseInt(Math.floor(Math.random() * 2000)),
-            style: ABSTRACT,
             isAlive: true
           },
           title: artwork.launch_site.site_name,
           year: parseInt(Math.floor(Math.random() * 2000)),
           medium: artwork.rocket.rocket_type,
           height: parseInt(Math.floor(Math.random() * 200)),
-          width: parseInt(Math.floor(Math.random() * 500)),
-          style: ABSTRACT
+          width: parseInt(Math.floor(Math.random() * 500))
         };
       }
 }

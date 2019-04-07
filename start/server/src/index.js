@@ -1,14 +1,17 @@
 const { ApolloServer } = require('apollo-server');
 const typeDefs = require('./schema.js');
-const server = new ApolloServer({ typeDefs });
+const resolvers = require('./resolvers');
+const server = new ApolloServer({ 
+        typeDefs,
+        resolvers,
+        dataSources: () => ({
+            ArtworkAPI: new ArtworkAPI(),
+            UserAPI: new UserAPI({ store }),
+        }) 
+    });
 
 const store = createStore();
 
 server.listen().then(({ url }) => {
     console.log(`🚀 Server ready at ${url}`);
-
-    dataSources: () => ({
-        ArtworkAPI: new ArtworkAPI(),
-        UserAPI: new UserAPI({ store }),
-    })
   });

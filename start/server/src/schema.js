@@ -54,6 +54,8 @@ const typeDefs = gql`
         addArtworks(artworkIds: [ID]!): ArtworkUpdateResponse!
         deleteArtwork(artworkId: ID!): ArtworkUpdateResponse!
         login(email: String): String
+        buyArtworks(artworkIds: [Int]): [Artwork]
+        cancelArtworkPurchase(artworkId: Int): [Artwork]
     }
 
     type ArtworkUpdateResponse {

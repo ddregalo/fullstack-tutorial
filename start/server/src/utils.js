@@ -52,6 +52,8 @@ module.exports.createStore = () => {
     token: SQL.STRING,
   });
 
+  users.sync();
+
   const artworks = db.define('artwork', {
     id: {
       type: SQL.INTEGER,
@@ -62,7 +64,16 @@ module.exports.createStore = () => {
     updatedAt: SQL.DATE,
     artworkId: SQL.INTEGER,
     userId: SQL.INTEGER,
+    title: SQL.STRING,
+    year: SQL.INTEGER,
+    medium: SQL.STRING,
+    height: SQL.INTEGER,
+    widht: SQL.INTEGER,
+    style: SQL.STRING
+    
   });
+
+  artworks.sync();
 
   return { users, artworks };
 };

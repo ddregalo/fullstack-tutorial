@@ -54,14 +54,20 @@ const typeDefs = gql`
         addArtworks(artworkIds: [ID]!): ArtworkUpdateResponse!
         deleteArtwork(artworkId: ID!): ArtworkUpdateResponse!
         login(email: String): String
-        buyArtworks(artworkIds: [Int]): [Artwork]
-        cancelArtworkPurchase(artworkId: Int): [Artwork]
+        buyArtworks(artworkIds: [Int]): ArtworkTransactionResponse!
+        cancelArtworkPurchase(artworkId: Int): ArtworkTransactionResponse!
     }
 
     type ArtworkUpdateResponse {
         success: Boolean!
         message: String
         artwokrs: [Artwork]
+    }
+
+    type ArtworkTransactionResponse {
+        success: Boolean!
+        message: String
+        artworks: [Artwork]
     }
 `;
 
